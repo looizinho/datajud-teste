@@ -17,19 +17,33 @@ function json(response, status, body) {
 }
 
 async function handleApi(request, response, url) {
-  if (request.method === "GET" && url.pathname === "/api/processo") {
-    try {
-      const result = await findProcessos(url.searchParams.get("numero"));
-      if (result.error) return json(response, result.status, { error: result.error });
-      return json(response, result.status, result.body);
-    } catch (error) {
-      return json(response, 502, { error: error.message });
-    }
+  if (url.pathname === "/api/processo") {
+    return queryProcesso(request, response);
+  }
+  if (url.pathname.startsWith("/api/processo/")) {
+    if (request.method !== "GET") return queryProcesso(request, response);
+    const rawNumero = url.pathname.slice("/api/processo/".length);
+    if (!rawNumero || rawNumero.includes("/")) return json(response, 400, { error: "Número inválido" });
+    return queryProcesso(request, response, decodeURIComponent(rawNumero));
   }
   if (request.method === "GET" && url.pathname === "/api/health") {
     return json(response, 200, { ok: true, endpoint: getDataJudConfig().url });
   }
   return false;
+}
+
+async function queryProcesso(request, response, numero) {
+  if (request.method !== "GET") {
+    response.setHeader("allow", "GET");
+    return json(response, 405, { error: "Método não permitido" });
+  }
+  try {
+    const result = await findProcessos(numero);
+    if (result.error) return json(response, result.status, { error: result.error });
+    return json(response, result.status, result.body);
+  } catch (error) {
+    return json(response, 502, { error: error.message });
+  }
 }
 
 const server = http.createServer(async (request, response) => {

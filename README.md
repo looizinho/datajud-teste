@@ -8,7 +8,7 @@ Node.js 22+.
 
 ## Configuração
 
-Configure a API Key pública vigente publicada pelo CNJ no arquivo `.env`:
+Configure a API Key pública vigente publicada pelo CNJ no ambiente (por exemplo, em um arquivo `.env` local, que não deve ser commitado):
 
 ```dotenv
 DATAJUD_API_KEY="sua-chave"
@@ -28,7 +28,7 @@ Abra `http://localhost:3300`.
 
 O processo de teste já vem preenchido: `0813000-58.2026.8.19.0021`.
 
-Em um deploy na Vercel, as Functions ficam em `api/health.js` e `api/processo.js`; configure `DATAJUD_API_KEY` e, opcionalmente, `DATAJUD_URL` nas variáveis de ambiente do projeto. A Vercel serve os arquivos estáticos de `public/` automaticamente.
+Em um deploy na Vercel, as Functions ficam em `api/health.js`, `api/processo.js` e `api/processo/[numero].js`. A rota de consulta é `GET /api/processo/:numero`, por exemplo `GET /api/processo/08130005820268190021`; configure `DATAJUD_API_KEY` e, opcionalmente, `DATAJUD_URL` nas variáveis de ambiente do projeto. A Vercel reconhece o segmento dinâmico pelo nome `[numero]`, sem configuração adicional. A Vercel serve os arquivos estáticos de `public/` automaticamente.
 
 ## Próximos experimentos
 
