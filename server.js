@@ -2,6 +2,7 @@ import http from "node:http";
 import { readFile } from "node:fs/promises";
 import { extname, join } from "node:path";
 import { findProcessos, getDataJudConfig } from "./lib/datajud.js";
+import { createProcessFeed } from "./lib/rss.js";
 
 const PORT = Number(process.env.PORT || 3000);
 const publicDir = join(process.cwd(), "public");
@@ -16,7 +17,30 @@ function json(response, status, body) {
   response.end(JSON.stringify(body, null, 2));
 }
 
+async function processFeed(response, url) {
+  try {
+    const match = url.pathname.match(/^\/api\/processo\/([^/]+)\/feed\/?$/);
+    const requestedNumber = match ? decodeURIComponent(match[1]) : "";
+    const result = await findProcessos(requestedNumber, process.env);
+    if (result.error) return json(response, result.status, { error: result.error });
+    if (!result.body.processos.length) return json(response, 404, { error: "Processo não encontrado" });
+
+    const feedUrl = `${url.origin}/api/processo/${encodeURIComponent(result.body.query)}/feed`;
+    response.writeHead(200, {
+      "cache-control": "public, max-age=60, s-maxage=60, stale-while-revalidate=300",
+      "content-type": "application/rss+xml; charset=utf-8"
+    });
+    response.end(createProcessFeed(result.body.processos[0], feedUrl));
+  } catch (error) {
+    json(response, 502, { error: error.message });
+  }
+  return true;
+}
+
 async function handleApi(request, response, url) {
+  if (request.method === "GET" && /^\/api\/processo\/[^/]+\/feed\/?$/.test(url.pathname)) {
+    return processFeed(response, url);
+  }
   if (request.method === "GET" && url.pathname === "/api/processo") {
     try {
       const result = await findProcessos(url.searchParams.get("numero"));
