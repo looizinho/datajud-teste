@@ -30,6 +30,14 @@ O processo de teste já vem preenchido: `0813000-58.2026.8.19.0021`.
 
 Em um deploy na Vercel, as Functions ficam em `api/health.js` e `api/processo.js`; configure `DATAJUD_API_KEY` e, opcionalmente, `DATAJUD_URL` nas variáveis de ambiente do projeto. A Vercel serve os arquivos estáticos de `public/` automaticamente.
 
+Cada processo também possui um feed RSS em `/api/processo/:numero/feed`, por exemplo:
+
+```text
+/api/processo/08130005820268190021/feed
+```
+
+O feed consulta o DataJud sob demanda, publica as 50 movimentações mais recentes e usa cache HTTP curto. Números inválidos e processos não encontrados retornam JSON, como nas demais respostas de erro da API.
+
 ## Próximos experimentos
 
 1. Comparar movimentos com a Consulta Pública do PJe/TJRJ.
