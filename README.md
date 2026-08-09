@@ -8,10 +8,11 @@ Node.js 22+.
 
 ## Configuração
 
-Defina a API Key pública vigente publicada pelo CNJ:
+Configure a API Key pública vigente publicada pelo CNJ no arquivo `.env`:
 
-```bash
-export DATAJUD_API_KEY="sua-chave"
+```dotenv
+DATAJUD_API_KEY="sua-chave"
+PORT=3300
 ```
 
 Opcionalmente, altere o endpoint com `DATAJUD_URL`.
@@ -22,7 +23,7 @@ Opcionalmente, altere o endpoint com `DATAJUD_URL`.
 npm start
 ```
 
-Abra `http://localhost:3000`.
+Abra `http://localhost:3300`.
 
 O processo de teste já vem preenchido: `0813000-58.2026.8.19.0021`.
 
