@@ -12,6 +12,7 @@ Configure a API Key pública vigente publicada pelo CNJ no arquivo `.env`:
 
 ```dotenv
 DATAJUD_API_KEY="sua-chave"
+DATAJUD_URL="https://api-publica.datajud.cnj.jus.br/api_publica_tjrj/_search"
 PORT=3300
 ```
 
@@ -26,6 +27,8 @@ npm start
 Abra `http://localhost:3300`.
 
 O processo de teste já vem preenchido: `0813000-58.2026.8.19.0021`.
+
+Em um deploy na Vercel, as Functions ficam em `api/health.js` e `api/processo.js`; configure `DATAJUD_API_KEY` e, opcionalmente, `DATAJUD_URL` nas variáveis de ambiente do projeto. A Vercel serve os arquivos estáticos de `public/` automaticamente.
 
 ## Próximos experimentos
 
