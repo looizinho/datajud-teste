@@ -1,2 +1,30 @@
 <!doctype html>
-<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DataJud • TJRJ</title><link rel="stylesheet" href="/style.css"></head><body><main><header><span class="eyebrow">CNJ • DATAJUD • TJRJ</span><h1>Consulta processual</h1><p>Teste direto da API Pública do DataJud, sem JSF, ViewState e demais artefatos arqueológicos.</p></header><form id="form"><input id="numero" value="0813000-58.2026.8.19.0021" autocomplete="off" aria-label="Número do processo"><button>Consultar</button></form><div id="status"></div><section id="result"></section><details id="rawBox" hidden><summary>Resposta JSON bruta</summary><pre id="raw"></pre></details></main><script type="module" src="/app.js"></script></body></html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DataJud • TJRJ</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+  <main>
+    <header><span class="eyebrow">CNJ • DATAJUD • TJRJ</span>
+      <h1>Consulta processual</h1>
+      <p>Teste direto da API Pública do DataJud, sem JSF, ViewState e demais artefatos arqueológicos.</p>
+    </header>
+    <form id="form">
+      <input id="numero" value="0813000-58.2026.8.19.0021" autocomplete="off" aria-label="Número do processo"><button>Consultar</button>
+    </form>
+    <div id="status"></div>
+    <section id="result"></section>
+    <details id="rawBox" hidden>
+      <summary>Resposta JSON bruta</summary>
+      <pre id="raw"></pre>
+    </details>
+  </main>
+  <script type="module" src="/app.js"></script>
+</body>
+
+</html>

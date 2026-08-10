@@ -30,7 +30,7 @@ form.addEventListener('submit', async (e) => {
   rawBox.hidden = true;
 
   try {
-    const r = await fetch(`/api/processo/${encodeURIComponent(input.value)}`);
+    const r = await fetch(`/api/processo?numero=${encodeURIComponent(input.value)}`);
     const data = await r.json();
 
     raw.textContent = JSON.stringify(data, null, 2);
