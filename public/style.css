@@ -2,16 +2,35 @@
   box-sizing: border-box;
 }
 
+:root {
+  color-scheme: light dark;
+  --page-bg: #f3f4f6;
+  --surface: #fff;
+  --text: #171719;
+  --muted: #6b7280;
+  --label: #888;
+  --date: #777;
+  --border: #ddd;
+  --subtle-border: #eee;
+  --button-bg: #171719;
+  --button-text: #fff;
+  --code-bg: #111;
+  --code-text: #ddd;
+  --footer-hover: #e5e7eb;
+  --focus: #171719;
+  --shadow: #0000000b;
+}
+
 body {
   margin: 0;
   font: 15px/1.5 system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
-  background: #f3f4f6;
-  color: #171719;
+  background: var(--page-bg);
+  color: var(--text);
 }
 
 main {
   width: min(900px, calc(100% - 32px));
-  margin: 64px auto;
+  margin: 64px auto 32px;
 }
 
 header {
@@ -22,27 +41,37 @@ header {
   font-size: 12px;
   font-weight: 700;
   letter-spacing: .12em;
-  color: #6b7280;
+  color: var(--muted);
 }
 
 h1 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   margin: 6px 0;
   font-size: 42px;
   letter-spacing: -.04em;
 }
 
+.brand-icon {
+  width: 52px;
+  height: 52px;
+  flex: none;
+  object-fit: contain;
+}
+
 p {
-  color: #6b7280;
+  color: var(--muted);
 }
 
 form {
   display: flex;
   gap: 10px;
   padding: 10px;
-  background: #fff;
-  border: 1px solid #ddd;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 18px;
-  box-shadow: 0 12px 35px #0000000b;
+  box-shadow: 0 12px 35px var(--shadow);
 }
 
 input {
@@ -53,6 +82,7 @@ input {
   border: 0;
   outline: 0;
   background: transparent;
+  color: var(--text);
   font: inherit;
   font-size: 17px;
 }
@@ -61,22 +91,22 @@ button {
   padding: 0 20px;
   border: 0;
   border-radius: 12px;
-  background: #171719;
-  color: #fff;
+  background: var(--button-bg);
+  color: var(--button-text);
   font-weight: 650;
   cursor: pointer;
 }
 
 #status {
   padding: 18px 4px;
-  color: #6b7280;
+  color: var(--muted);
 }
 
 .card {
   margin: 12px 0;
   padding: 22px;
-  background: #fff;
-  border: 1px solid #ddd;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 18px;
 }
 
@@ -90,7 +120,7 @@ button {
   display: block;
   font-size: 11px;
   letter-spacing: .08em;
-  color: #888;
+  color: var(--label);
   text-transform: uppercase;
 }
 
@@ -100,7 +130,7 @@ button {
 
 .move {
   padding: 14px 0;
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--subtle-border);
 }
 
 .move:first-child {
@@ -109,7 +139,7 @@ button {
 
 .date {
   font-size: 12px;
-  color: #777;
+  color: var(--date);
 }
 
 details {
@@ -119,23 +149,91 @@ details {
 pre {
   overflow: auto;
   padding: 18px;
-  background: #111;
+  background: var(--code-bg);
   border-radius: 14px;
-  color: #ddd;
+  color: var(--code-text);
   font-size: 12px;
+}
+
+.site-footer {
+  width: min(900px, calc(100% - 32px));
+  margin: 0 auto 32px;
+  text-align: center;
+}
+
+.site-footer a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.site-footer a:hover {
+  background: var(--footer-hover);
+  color: var(--text);
+}
+
+.site-footer a:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.site-footer img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page-bg: #111214;
+    --surface: #1b1c20;
+    --text: #f3f4f6;
+    --muted: #a7aab2;
+    --label: #a7aab2;
+    --date: #9ca0a9;
+    --border: #35363b;
+    --subtle-border: #2c2d32;
+    --button-bg: #f3f4f6;
+    --button-text: #171719;
+    --code-bg: #090a0c;
+    --code-text: #e5e7eb;
+    --footer-hover: #25262b;
+    --focus: #f3f4f6;
+    --shadow: #00000040;
+  }
+
+  .site-footer img {
+    filter: invert(1);
+  }
 }
 
 @media (max-width: 600px) {
   main {
-    margin: 30px auto;
+    margin: 30px auto 18px;
   }
 
   h1 {
     font-size: 34px;
   }
 
+  .brand-icon {
+    width: 44px;
+    height: 44px;
+  }
+
   form {
     display: block;
+  }
+
+  #rawBox {
+    display: none;
   }
 
   button {
