@@ -9,7 +9,9 @@ const publicDir = join(process.cwd(), "public");
 const mime = {
   ".html": "text/html; charset=utf-8",
   ".css": "text/css; charset=utf-8",
-  ".js": "text/javascript; charset=utf-8"
+  ".js": "text/javascript; charset=utf-8",
+  ".png": "image/png",
+  ".webmanifest": "application/manifest+json; charset=utf-8"
 };
 
 function json(response, status, body) {
@@ -85,7 +87,9 @@ const server = http.createServer(async (request, response) => {
   }
   try {
     const file = await readFile(join(publicDir, requested));
-    response.writeHead(200, { "content-type": mime[extname(requested)] || "application/octet-stream" });
+    const headers = { "content-type": mime[extname(requested)] || "application/octet-stream" };
+    if (requested === "/sw.js") headers["cache-control"] = "no-cache";
+    response.writeHead(200, headers);
     response.end(file);
   } catch {
     response.writeHead(404);
