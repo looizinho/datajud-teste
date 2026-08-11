@@ -30,6 +30,8 @@ Abra `http://localhost:3300`.
 
 O processo de teste já vem preenchido: `0813000-58.2026.8.19.0021`.
 
+O SundaJUS pode ser instalado como aplicativo pelo menu do navegador. A interface e os arquivos visuais ficam disponíveis offline; as consultas processuais continuam exigindo conexão com o DataJud.
+
 Em um deploy na Vercel, as Functions ficam em `api/health.js`, `api/processo.js` e `api/processo/[numero].js`. A rota de consulta é `GET /api/processo/:numero`, por exemplo `GET /api/processo/08130005820268190021`; configure `DATAJUD_API_KEY` e, opcionalmente, `DATAJUD_URL` nas variáveis de ambiente do projeto. A Vercel reconhece o segmento dinâmico pelo nome `[numero]`, sem configuração adicional. A Vercel serve os arquivos estáticos de `public/` automaticamente.
 
 Cada processo também possui um feed RSS em `/api/processo/:numero/feed`, por exemplo:
