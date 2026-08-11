@@ -2,6 +2,8 @@
 
 MVP mínimo em Node.js para consultar processos do TJRJ pela API Pública do DataJud/CNJ.
 
+![Consulta processual do DataJud em um dispositivo móvel](./public/images/consulta-processual-mobile.jpg)
+
 ## Requisitos
 
 Node.js 22+.
